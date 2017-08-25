@@ -1,0 +1,89 @@
+﻿@model ProductManager.Models.ProductsModel
+
+@{
+    ViewBag.Title = "List";
+    var productList = Model.GetProductList();
+}
+
+<div class="container body-content">
+    <div class="list-title">
+        <div class="row">
+            <div class="col-md-10">
+                <h2>Product List</h2>
+            </div>
+            <div class="col-md-2 right">
+                <a href="@Url.Action("Create", "Product")" class="btn btn-primary">Create Product</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        @if (productList?.Count > 0)
+        {
+            <table id="product-list" class="table table-striped header-fixed">
+                <thead>
+                <tr>
+                    <th>Product Number</th>
+                    <th>Product SKU</th>
+                    <th>Product Title</th>
+                    <th>Product Price</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in productList)
+                {
+                    <tr>
+                        <td>
+                            <span class="product-item-cell">@item.Number</span>
+                        </td>
+                        <td>
+                            <span class="product-item-cell">@item.SKU</span>
+                        </td>
+                        <td>
+                            <span class="product-item-cell">@item.Title</span>
+                        </td>
+                        <td>
+                            <span class="product-item-cell">@item.Price</span>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Edit", "Product", null, FormMethod.Post, new { @class = "form-actions", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a class="action-icon edit-icon"onclick="SubmitClosestForm(event, '@Url.Action("Edit", "Product")', '@item.Number');" title="Edit Product"> <i class="fa fa-pencil fa-lg"></i></a>
+                                <a class="action-icon delete-icon" onclick="SubmitClosestForm(event, '@Url.Action("Delete", "Product")', '@item.Number');" title="Delete Product"> <i class="fa fa-trash fa-lg"></i></a>
+                            }
+                            
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-info" role="alert" style="width: 90%;">
+                Current user doesn't have associated products.
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function SubmitClosestForm(event, action, productNumber) {
+
+        if (action.indexOf('Product/Delete') > -1) {
+            var confirmation = confirm("Do you want to delete current product?");
+            if (confirmation === true) {
+                submitAction(event, action, productNumber);
+            }
+        } else {
+            submitAction(event, action, productNumber);
+        }
+    }
+
+    function submitAction(event, action, productNumber) {
+        var form = $(event.target).closest('form');
+        form.attr("action", action + '?productNumber=' + productNumber);
+        form.submit();
+    }
+</script>

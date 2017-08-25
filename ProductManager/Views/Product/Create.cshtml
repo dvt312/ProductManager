@@ -1,0 +1,95 @@
+﻿@model ProductManager.Models.ProductModel
+
+@{
+    var title = "Create Product";
+    var action = "Create";
+    var productNumber = "";
+    if (!string.IsNullOrWhiteSpace(Model?.Number) && Model.IsUpdate)
+    {
+        action = "Update";
+        title = "Update Product: " + Model.Title;
+        productNumber = Model.Number;
+    }
+}
+
+<div class="container body-content">
+    <div class="list-title">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>@title</h2>
+            </div>
+        </div>
+    </div>
+    <div class="body-container">
+        @using (Html.BeginForm(action, "Product", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr/>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    </div>
+                }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Number, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Number, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Number, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SKU, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SKU, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.SKU, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Price, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="@action" class="btn btn-primary" style="cursor: pointer;"/>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "List", "Product")
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var productNumber = '@productNumber';
+        $(document).ready(function() {
+            if (productNumber !== undefined && productNumber != null && productNumber.length > 0) {
+                $('input#Number').attr('readonly', 'readonly');
+            }
+        });
+    </script>
+}
+
+

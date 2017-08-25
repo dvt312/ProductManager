@@ -1,0 +1,101 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 450px;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.list-title {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+
+.table-container {
+    padding-top: 20px;
+    overflow: auto;
+}
+
+.navbar-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.body-container {
+    width: 100%;
+    top: 56px;
+    overflow: auto;
+}
+
+.action-icon {
+    cursor: pointer;
+}
+
+.delete-icon i {
+    color: #bf3636;
+}
+
+.edit-icon i {
+    color: #0275d8;
+}
+
+.alert.alert-danger ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}

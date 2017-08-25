@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Manager Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon"/>
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon"/>
+</head>
+
+<body style="overflow: hidden;">
+<div class="navbar-container">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="@Url.Content("~/Content/img/logo.png")" width="30" height="30" class="d-inline-block align-top" alt="">
+            Product Manager
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "List" ? "active" : "")">
+                    @Html.ActionLink("List", "List", "Product", null, new {@class = "nav-link"})
+                </li>
+            </ul>
+            @using (Html.BeginForm("Logout", "Account", null, FormMethod.Post, new { @class = "form-inline my-2 my-lg-0", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <input class="btn btn-secondary" value="Logout" type="submit" />
+            }
+        </div>
+    </nav>
+</div>
+<div class="container body-content body-container">
+    @RenderBody()
+</div>
+<div class="footer-container">
+    <footer>
+        <hr/>
+        <p class="text-center">&copy; @DateTime.Now.Year - Product Manager</p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(document).ready(function() {
+        CalculateContainerHeight();
+    });
+
+    function CalculateContainerHeight() {
+        var windowHeight = $(window).height();
+        $('.header-fixed > tbody').height(windowHeight - 300);
+    }
+
+    $(window).resize(function () {
+        CalculateContainerHeight();
+    }).resize();
+</script>
