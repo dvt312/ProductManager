@@ -53,6 +53,15 @@ namespace ProductManager.Models
         }
 
         /// <summary>
+        /// Gets the complete product list.
+        /// </summary>
+        /// <returns>The ProductModel list with all products for user.</returns>
+        public List<ProductModel> GetProductList()
+        {
+            return _products.Values.ToList();
+        }
+
+        /// <summary>
         /// Gets a product using product number.
         /// </summary>
         /// <param name="productNumber">Product number to get object</param>
