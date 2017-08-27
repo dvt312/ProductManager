@@ -29,7 +29,7 @@
             @using (Html.BeginForm("Logout", "Account", null, FormMethod.Post, new { @class = "form-inline my-2 my-lg-0", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <input class="btn btn-secondary" value="Logout" type="submit" />
+                <input class="btn btn-secondary btn-logout" value="Logout" type="submit" />
             }
         </div>
     </nav>

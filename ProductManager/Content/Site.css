@@ -82,7 +82,7 @@ footer {
     overflow: auto;
 }
 
-.action-icon {
+.action-icon, .btn-logout {
     cursor: pointer;
 }
 

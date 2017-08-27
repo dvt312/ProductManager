@@ -16,7 +16,7 @@ namespace ProductManager.Service
         /// <param name="userName">The current logged user name</param>
         /// <param name="product">The ProductModel object to create</param>
         /// <param name="isUpdate">Flag indicating if request comes from Update page</param>
-        /// <returns>Boolean indicating if record was created/updated/returns>
+        /// <returns>Boolean indicating if record was created/updated</returns>
         public bool CreateProduct(string userName, ProductModel product, bool isUpdate = false)
         {
             var entity = ProductMapper.MapProductModelToProductEntity(product);
