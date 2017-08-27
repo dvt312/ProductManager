@@ -38,6 +38,12 @@
                         <div class="checkbox">
                             @Html.CheckBoxFor(m => m.UsePersistentStorage)
                             @Html.LabelFor(m => m.UsePersistentStorage)
+                            <div style="margin-left: 8px; display: inline-block;">
+                                <i class="fa fa-question"
+                                   aria-hidden="true"
+                                   data-toggle="tooltip"
+                                   title="If you don't use persistent storage (Database), these are the hard-coded users admin,user1,user2,user3,user4,user5, its password is 12345."></i>
+                            </div>
                         </div>
                     </div>
                 </div>
